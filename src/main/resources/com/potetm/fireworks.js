@@ -1,5 +1,3 @@
-#!/opt/java/home/bin/jjs -fx -scripting
-
 // from https://github.com/webdevwilson/nashorn-fireworks
 var ArrayList      = Java.type("java.util.ArrayList");
 var File           = Java.type("java.io.File");
