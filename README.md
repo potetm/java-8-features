@@ -5,3 +5,5 @@ Includes:
   * Concurrency API changes
   * IO/NIO Changes
   * Option type
+
+About the removal of PermGen: http://java-latte.blogspot.com/2014/03/metaspace-in-java-8.html
