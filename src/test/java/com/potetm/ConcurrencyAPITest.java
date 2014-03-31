@@ -62,7 +62,6 @@ public class ConcurrencyAPITest {
         assertEquals(Primer.PRIMES, found);
     }
 
-
     @Test
     public void completeableFuture() throws ExecutionException, InterruptedException {
         System.out.println("completeableFuture");
