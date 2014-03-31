@@ -7,13 +7,19 @@ import javax.script.ScriptException;
 import java.io.InputStreamReader;
 
 public class Nashorn {
-    public static void onTheFlyScripting() throws ScriptException {
+    private static void onTheFlyScripting() throws ScriptException {
         ScriptEngineManager factory = new ScriptEngineManager();
         ScriptEngine nashornEngine = factory.getEngineByName("nashorn");
         nashornEngine.eval("print('ON ZE FLY!');");
     }
 
-    public static void runAScript() throws ScriptException, NoSuchMethodException {
+    private static void runAScript() throws ScriptException, NoSuchMethodException {
+        ScriptEngineManager factory = new ScriptEngineManager();
+        ScriptEngine nashornEngine = factory.getEngineByName("nashorn");
+        nashornEngine.eval(new InputStreamReader(Nashorn.class.getResourceAsStream("hello.js")));
+    }
+
+    private static void invokeFunction() throws ScriptException, NoSuchMethodException {
         ScriptEngineManager factory = new ScriptEngineManager();
         ScriptEngine nashornEngine = factory.getEngineByName("nashorn");
         nashornEngine.eval(new InputStreamReader(Nashorn.class.getResourceAsStream("hello.js")));
@@ -23,7 +29,8 @@ public class Nashorn {
     }
 
     public static void main(String... args) throws ScriptException, NoSuchMethodException {
-        runAScript();
         onTheFlyScripting();
+        runAScript();
+        invokeFunction();
     }
 }
