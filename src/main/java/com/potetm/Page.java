@@ -18,10 +18,6 @@ public class Page {
             this.avgMsOnPage = avgMsOnPage;
         }
 
-        public Metrics() {
-            this(null, null);
-        }
-
         @Override
         public String toString() {
             return String.format("{ avgMsOnPage=%d, visits=%d }", avgMsOnPage, visits);
@@ -63,10 +59,6 @@ public class Page {
 
         public Summary(Long accountId, String description) {
             this(accountId, description, null);
-        }
-
-        public Summary() {
-            this(null, null, null);
         }
 
         @Override

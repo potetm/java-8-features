@@ -26,12 +26,12 @@ public class ConcurrencyAPITest {
     public void printTime() {
         long totalTime = System.currentTimeMillis() - time;
 
-        System.out.println("Test took:" + totalTime);
+        System.err.println("Test took:" + totalTime);
     }
 
     @Test
     public void forLoop() throws ExecutionException, InterruptedException {
-        System.out.println("forLoop");
+        System.err.println("forLoop");
         List<Integer> found = new ArrayList<>();
         for (int i = 1; i < 1_000_000; i++) {
             if (Primer.isPrime(i)) {
@@ -44,15 +44,24 @@ public class ConcurrencyAPITest {
 
     @Test
     public void noParallel() throws ExecutionException, InterruptedException {
-        System.out.println("noParallel");
+        System.err.println("noParallel");
         List<Integer> found = IntStream.range(1, 1_000_000).boxed().filter(Primer::isPrime).collect(Collectors.toList());
 
         assertEquals(Primer.PRIMES, found);
     }
 
     @Test
+    public void parallel() throws ExecutionException, InterruptedException {
+        System.err.println("parallel");
+
+        List<Integer> found = IntStream.range(1, 1_000_000).parallel().boxed().filter(Primer::isPrime).collect(Collectors.toList());
+
+        assertEquals(Primer.PRIMES, found);
+    }
+
+    @Test
     public void forkJoinPool() throws ExecutionException, InterruptedException {
-        System.out.println("forkJoinPool");
+        System.err.println("forkJoinPool");
         ForkJoinPool commonPool = ForkJoinPool.commonPool();
 
         List<Integer> found = commonPool.submit(() ->
@@ -64,7 +73,7 @@ public class ConcurrencyAPITest {
 
     @Test
     public void completeableFuture() throws ExecutionException, InterruptedException {
-        System.out.println("completeableFuture");
+        System.err.println("completeableFuture");
         CompletableFuture<Author> author = CompletableFuture.supplyAsync(() -> PageService.getAuthorByName("Tim"));
         CompletableFuture<Metrics> pageMetricPromise = author.thenApplyAsync(PageService::getMetricsByAuthor);
         CompletableFuture<List<Summary>> summariesPromise = author.thenApplyAsync(PageService::getSummariesByAuthor);
@@ -81,8 +90,8 @@ public class ConcurrencyAPITest {
 
     @Test
     public void adder() {
-        System.out.println("adder");
-        // Some pretty charts and extra info to be found here: https://minddotout.wordpress.com/2013/05/11/java-8-concurrency-longadder/
+        System.err.println("adder");
+        // Some pretty charts and extra info to be found here: https://minddoterr.wordpress.com/2013/05/11/java-8-concurrency-longadder/
         final LongAdder adder = new LongAdder();
         IntStream.range(0, 1_000_000).parallel().forEach((i) -> adder.increment());
 
