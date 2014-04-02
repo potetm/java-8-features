@@ -11,6 +11,15 @@ import java.util.stream.Stream;
 
 import static org.junit.Assert.assertArrayEquals;
 
+/**
+ *  I apologize, but *none* of these tests will work on any machine but my own. I honestly can't
+ *  think of a good way around it besides writing a file structure to a tmp directory before getting
+ *  started with this test, which seems like more trouble than it's worth.
+ *
+ *  If anyone has any better ideas, I'm more than happy to hear about them.
+ *
+ *  For now, suffice it to say that this test indeed runs and passes from my machine.
+ */
 public class NIOTest {
     @Test
     public void listFiles() throws IOException {
